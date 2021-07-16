@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
+import axios from "axios"
 
 export default function CreateUser() {
+    var history = useHistory();
 
     const [values, setValues] = useState({
         id: "",
@@ -28,6 +30,11 @@ export default function CreateUser() {
         event.preventDefault();
         setValues({...values})
         console.log(values);
+        axios.post("https://gorest.co.in/public-api/users", values);
+        setTimeout(() => {
+              alert("New User Created");
+              history.push("/home");
+            }, 2000);
     }
 
     const createForm = () => (
@@ -76,15 +83,9 @@ export default function CreateUser() {
                 value={gender}
                 >
                     <option>Select Gender</option>
-                    <option>
-                        Male
-                    </option>
-                    <option>
-                        Female
-                    </option>
-                    <option>
-                        Others
-                    </option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
                 </select>
             </div>
 
@@ -105,7 +106,7 @@ export default function CreateUser() {
                 onClick={onSubmit}
                 className="btn btn-success mb-3"
             >
-                Create Product
+                Create User
             </button>
         </form>
     )

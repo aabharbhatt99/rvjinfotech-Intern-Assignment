@@ -20,7 +20,7 @@ const Home = () => {
                         )}
                     />
                 );
-            })}
+            })}2
             <Route exact path="/">
                 <Redirect to="/home" />
             </Route>
