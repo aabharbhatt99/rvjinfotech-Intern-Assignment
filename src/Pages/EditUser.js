@@ -2,7 +2,15 @@ import React, {useState, useEffect} from 'react'
 import {Link, useHistory} from "react-router-dom"
 import axios from "axios"
 
+const accessToken = '5b16a06ecae97431359d1dbc3dfb4b9a89442d7bc89d70203731e2fb0a6aec24' ;
+
+const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    "Content-type": "application/json"
+  }
+
 export default function CreateUser(props) {
+
     var history = useHistory();
 
     const userId = props.location.state
@@ -51,11 +59,11 @@ export default function CreateUser(props) {
         setValues({...values, status: value});
     }
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
         event.preventDefault();
         setValues({...values})
         console.log(values);
-        axios.put(`https://gorest.co.in/public-api/users/${userId}`, values);
+        await axios.put(`https://gorest.co.in/public-api/users/${userId}`, values, { headers });
         setTimeout(() => {
             alert("values Updated Successfully")
               history.push("/home");

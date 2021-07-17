@@ -2,6 +2,13 @@ import React, {useState} from 'react'
 import {Link, useHistory} from "react-router-dom"
 import axios from "axios"
 
+const accessToken = '5b16a06ecae97431359d1dbc3dfb4b9a89442d7bc89d70203731e2fb0a6aec24' ;
+
+const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    "Content-type": "application/json"
+  }
+
 export default function CreateUser() {
     var history = useHistory();
 
@@ -26,11 +33,11 @@ export default function CreateUser() {
         setValues({...values, status: !!!status})
     }
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
         event.preventDefault();
         setValues({...values})
         console.log(values);
-        axios.post("https://gorest.co.in/public-api/users", values);
+        await axios.post("https://gorest.co.in/public-api/users", values, { headers });
         setTimeout(() => {
               alert("New User Created");
               history.push("/home");
