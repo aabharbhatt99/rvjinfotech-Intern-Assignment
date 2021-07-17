@@ -24,6 +24,9 @@ const Home = () => {
             <Route exact path="/">
                 <Redirect to="/home" />
             </Route>
+            <Route exact path="/rvjinfotech-Intern-Assignment">
+                <Redirect to="/home" />
+            </Route>
         </Switch>
     ); 
 
